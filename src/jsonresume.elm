@@ -2,7 +2,6 @@ module Jsonresume exposing (..)
 
 import Json.Decode exposing (nullable, int, string, float, Decoder, decodeString, list, maybe)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
-import Maybe exposing (withDefault)
 
 
 type alias Resume =
