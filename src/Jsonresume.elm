@@ -11,6 +11,7 @@ type alias Resume =
     , education : List Education
     , awards : List Award
     , publications : List Publication
+    , skills : List Skill
     , languages : List Language
     , interests : List Interest
     , references : List Reference
@@ -26,6 +27,7 @@ resumeDecoder =
         |> optional "education" (list educationDecoder) []
         |> optional "awards" (list awardDecoder) []
         |> optional "publications" (list publicationDecoder) []
+        |> optional "skills" (list skillDecoder) []
         |> optional "languages" (list languageDecoder) []
         |> optional "interests" (list interestDecoder) []
         |> optional "references" (list referenceDecoder) []
@@ -55,7 +57,7 @@ basicsDecoder =
         |> optional "website" string ""
         |> optional "summary" string ""
         |> optional "location" (nullable locationDecoder) Nothing
-        |> optional "profiles" (list profilesDecoder) []
+        |> optional "profiles" (list profileDecoder) []
 
 
 type alias Location =
@@ -84,11 +86,11 @@ type alias Profile =
     }
 
 
-profilesDecoder : Decoder Profile
-profilesDecoder =
+profileDecoder : Decoder Profile
+profileDecoder =
     decode Profile
-        |> optional "network" string ""
-        |> optional "username" string ""
+        |> required "network" string
+        |> required "username" string
         |> optional "url" string ""
 
 
